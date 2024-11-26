@@ -29,7 +29,7 @@ return view.extend({
     render: function (data) {
         var main_div = E("div");
 
-        var header = E("h2", {}, "Antiblock");
+        var header = E("h2", {}, "AntiBlock");
 
         var section_descr_div = E(
             "div",
