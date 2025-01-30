@@ -27,7 +27,7 @@ return view.extend({
 		o.default = '192.168.1.1:5053';
 		o.depends('enabled', '1');
 
-		o = s.option(widgets.DeviceSelect, 'VPN_name', _('VPN name'), _('gdgdgdgdg'));
+		o = s.option(widgets.DeviceSelect, 'VPN_name', _('VPN name'), _('Interface name'));
 		o.depends('enabled', '1');
 
 		o = s.option(form.Value, 'output', _('Output'), _('Log or statistics output folder'));

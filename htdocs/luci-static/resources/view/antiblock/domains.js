@@ -36,7 +36,7 @@ return view.extend({
             {
                 class: 'cbi-section-descr',
             },
-            _('Blocked domains')
+            _('Domains count in file: ')
         );
 
         const section_div = E(
@@ -58,7 +58,7 @@ return view.extend({
                 },
             );
 
-            section_descr_div.innerHTML += ' ' + data[0].domains.length;
+            section_descr_div.innerHTML += data[0].domains.length;
 
             domains_textarea.value = '';
             data[0].domains.forEach((element) => domains_textarea.value += element + '\n');
