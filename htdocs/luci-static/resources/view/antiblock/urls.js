@@ -73,11 +73,8 @@ return view.extend({
                                 _("Write URLs")
                             ),
                         ]);
-                        const lines = urls_textarea.value.replace(/\r\n/g, "\n").split("\n");
-                        const filtered = lines.filter(elm => elm);
-                        const myJsonString = JSON.stringify(filtered);
-                        const myArray = JSON.parse(myJsonString);
-                        const write_urls_res = Promise.all([write_urls(myArray)]);
+                        const lines = urls_textarea.value.split(/\r?\n/).filter(Boolean);
+                        const write_urls_res = Promise.all([write_urls(lines)]);
                         write_urls_res.then(
                             function (value) { location.reload(); },
                             function (error) { /* code if some error */ }
