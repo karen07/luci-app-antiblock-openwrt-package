@@ -18,9 +18,10 @@ read_urls() {
     if [ -n "$file_path" ]; then
         if [ -f "$file_path" ]; then
             json_add_array "urls"
-            while read url; do
+            file_data=$(cat $file_path)
+            for url in $file_data; do
                 json_add_string "" "$url"
-            done <$file_path
+            done
             json_close_array
         else
             json_add_array "empty"
