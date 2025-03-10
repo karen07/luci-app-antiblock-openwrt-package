@@ -54,9 +54,31 @@ write_domains() {
     fi
 }
 
+domains_parse() {
+    local _value="$1"
+
+    json_add_string "" "${_value}"
+}
+
+read_routes() {
+    config_load "antiblock"
+
+    json_init
+    json_add_array "routes"
+    config_list_foreach "config" domains domains_parse
+    json_close_array
+    json_dump
+    json_cleanup
+}
+
 case "$1" in
 list)
     json_init
+    json_add_object "read_routes"
+    json_close_object
+    json_add_object "write_routes"
+    json_add_string 'routes' "routes"
+    json_close_object
     json_add_object "read_domains"
     json_close_object
     json_add_object "write_domains"
@@ -67,6 +89,13 @@ list)
     ;;
 call)
     case "$2" in
+    read_routes)
+        read_routes
+        ;;
+    write_routes)
+        read -r input
+        write_routes "$input"
+        ;;
     read_domains)
         read_domains
         ;;
