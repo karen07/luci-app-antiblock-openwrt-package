@@ -3,27 +3,25 @@
 # ubus -v list luci.antiblock
 # ubus -S call luci.antiblock read_routes
 # ubus -S call luci.antiblock write_routes '{"routes":[{"gateway":"test","domains_path":"https://test"},{"gateway":"test","domains_path":"/test"}]}'
-# ubus -S call luci.antiblock read_domains
+# ubus -S call luci.antiblock read_domains '{"domains_path":"/test"}'
 # ubus -S call luci.antiblock write_domains '{"domains":["test0.com","test1.com","test2.com"]}'
 
 . /lib/functions.sh
 . /usr/share/libubox/jshn.sh
 
-get_file_path() {
-    file_path="$(uci -q get antiblock.config.file)"
-}
-
 read_domains() {
-    get_file_path
+    json_load "$1"
+    json_get_var domains_path "domains_path"
+    json_cleanup
 
     json_init
-    if [ -n "$file_path" ]; then
-        if [ ! -f "$file_path" ]; then
-            touch "$file_path"
+    if [ -n "$domains_path" ]; then
+        if [ ! -f "$domains_path" ]; then
+            touch "$domains_path"
         fi
 
         json_add_array "domains"
-        file_data=$(cat $file_path)
+        file_data=$(cat $domains_path)
         for domain in $file_data; do
             json_add_string "" "$domain"
         done
@@ -110,6 +108,7 @@ list)
     json_add_string 'routes' "routes"
     json_close_object
     json_add_object "read_domains"
+    json_add_string 'domains_path' "domains_path"
     json_close_object
     json_add_object "write_domains"
     json_add_string 'domains' "domains"
@@ -127,7 +126,8 @@ call)
         write_routes "$input"
         ;;
     read_domains)
-        read_domains
+        read -r input
+        read_domains "$input"
         ;;
     write_domains)
         read -r input
