@@ -2,7 +2,7 @@
 
 # ubus -v list luci.antiblock
 # ubus -S call luci.antiblock read_routes
-# ubus -S call luci.antiblock write_routes
+# ubus -S call luci.antiblock write_routes '{"routes":[{"gateway":"test","domains_path":"https://test"},{"gateway":"test","domains_path":"/test"}]}'
 # ubus -S call luci.antiblock read_domains
 # ubus -S call luci.antiblock write_domains '{"domains":["test0.com","test1.com","test2.com"]}'
 
@@ -78,6 +78,24 @@ read_routes() {
     config_list_foreach "config" routes routes_parse
     json_close_array
     json_dump
+    json_cleanup
+}
+
+write_routes() {
+    uci -q delete antiblock.config.routes
+
+    json_load "$1"
+    json_select "routes"
+    idx=1
+    while json_is_a $idx object; do
+        json_select $idx
+        json_get_var gateway "gateway"
+        json_get_var domains_path "domains_path"
+        uci -q add_list antiblock.config.routes="$gateway $domains_path"
+        idx=$((idx + 1))
+        json_select ..
+    done
+
     json_cleanup
 }
 
