@@ -96,6 +96,8 @@ write_routes() {
         json_select ..
     done
 
+    uci -q commit antiblock.config.routes
+
     json_cleanup
 }
 
