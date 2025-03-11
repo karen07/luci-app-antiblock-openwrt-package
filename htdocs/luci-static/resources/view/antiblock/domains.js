@@ -3,10 +3,11 @@
 'require form';
 'require rpc';
 'require view';
+'require tools.widgets as widgets';
 
-const read_domains = rpc.declare({
+const read_routes = rpc.declare({
     object: 'luci.antiblock',
-    method: 'read_domains'
+    method: 'read_routes'
 });
 
 const write_domains = rpc.declare({
@@ -23,11 +24,14 @@ return view.extend({
     },
     load: function () {
         return Promise.all([
-            read_domains()
+            read_routes()
         ]);
     },
+    handleSignal: function (signum, pid, ev) {
+        console.log("Karen");
+    },
     render: function (data) {
-        const main_div = E('div');
+        /*const main_div = E('div');
 
         const header = E('h2', {}, _('AntiBlock'));
 
@@ -79,7 +83,7 @@ return view.extend({
                         const write_domains_res = Promise.all([write_domains(lines)]);
                         write_domains_res.then(
                             function (value) { location.reload(); },
-                            function (error) { /* code if some error */ }
+                            function (error) { }
                         );
                     },
                 },
@@ -100,6 +104,53 @@ return view.extend({
         }
 
         return main_div;
+        */
+
+        var v = E([], [
+            E('h2', _('Routes')),
+            E('div', { 'class': 'cbi-map-descr' }, _('xxxxxxxxxxxxxxxxxx')),
+
+            E('table', { 'class': 'table' }, [
+                E('tr', { 'class': 'tr table-titles' }, [
+                    E('th', { 'class': 'th' }, _('Gateway')),
+                    E('th', { 'class': 'th' }, _('Domains path')),
+                    E('th', { 'class': 'th center nowrap cbi-section-actions' })
+                ])
+            ])
+        ]);
+
+        var rows = [];
+        var i = 0;
+
+        data[0].routes.forEach((route) => {
+            i++;
+            rows.push([
+                E('input', {
+                    'type': 'text',
+                    'class': 'cbi-input-text',
+                    'value': route.gateway
+                }),
+                E('input', {
+                    'type': 'text',
+                    'class': 'cbi-input-text',
+                    'value': route.domains_path
+                }),
+                E('div', {}, [
+                    E('button', {
+                        'class': 'btn cbi-button-positive',
+                        'click': ui.createHandlerFn(this, 'handleSignal', 1, i)
+                    }, _('Save')), ' ',
+                    E('button', {
+                        'class': 'btn cbi-button-action',
+                        'click': ui.createHandlerFn(this, 'handleSignal', 2, i)
+                    }, _('Edit'))
+                ])
+            ]);
+        });
+
+        cbi_update_table(v.lastElementChild, rows, E('em', _('No information available')));
+
+        return v;
     },
     handleSave: null,
     handleSaveApply: null,

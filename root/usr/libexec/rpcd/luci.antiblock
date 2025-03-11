@@ -1,6 +1,8 @@
 #!/bin/sh
 
 # ubus -v list luci.antiblock
+# ubus -S call luci.antiblock read_routes
+# ubus -S call luci.antiblock write_routes
 # ubus -S call luci.antiblock read_domains
 # ubus -S call luci.antiblock write_domains '{"domains":["test0.com","test1.com","test2.com"]}'
 
@@ -56,8 +58,16 @@ write_domains() {
 
 domains_parse() {
     local _value="$1"
+    local gateway
+    local domains_path
 
-    json_add_string "" "${_value}"
+    gateway=$(echo "${_value}" | cut -d' ' -f1)
+    domains_path=$(echo "${_value}" | cut -d' ' -f2)
+
+    json_add_object
+    json_add_string "gateway" "$gateway"
+    json_add_string "domains_path" "$domains_path"
+    json_close_object
 }
 
 read_routes() {
