@@ -56,7 +56,7 @@ write_domains() {
     fi
 }
 
-domains_parse() {
+routes_parse() {
     local _value="$1"
     local gateway
     local domains_path
@@ -75,7 +75,7 @@ read_routes() {
 
     json_init
     json_add_array "routes"
-    config_list_foreach "config" domains domains_parse
+    config_list_foreach "config" routes routes_parse
     json_close_array
     json_dump
     json_cleanup

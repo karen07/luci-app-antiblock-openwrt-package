@@ -19,12 +19,12 @@
 			"path": "antiblock/form"
 		}
 	},
-	"admin/services/antiblock/domains": {
-		"title": "Domains file View",
+	"admin/services/antiblock/routes": {
+		"title": "Routes",
 		"order": 2,
 		"action": {
 			"type": "view",
-			"path": "antiblock/domains"
+			"path": "antiblock/routes"
 		}
 	}
 }
