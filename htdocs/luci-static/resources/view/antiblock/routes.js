@@ -143,12 +143,24 @@ return view.extend({
                     E('button', {
                         'class': 'btn cbi-button-action',
                         'click': ui.createHandlerFn(this, 'handleSignal', 2, i)
-                    }, _('Edit'))
+                    }, _('Edit')), ' ',
+                    E('button', {
+                        'class': 'btn cbi-button-negative',
+                        'click': ui.createHandlerFn(this, 'handleSignal', 3, i)
+                    }, _('Del'))
                 ])
             ]);
         });
 
         cbi_update_table(v.lastElementChild, rows, E('em', _('No information available')));
+
+        const add_btn = E(
+            'button', {
+            'class': 'btn cbi-button cbi-button-apply',
+            'click': ui.createHandlerFn(this, 'handleSignal', 4)
+        }, _('Add'));
+
+        v.appendChild(add_btn);
 
         return v;
     },

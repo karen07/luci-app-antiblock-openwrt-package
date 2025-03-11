@@ -12,7 +12,7 @@
 		}
 	},
 	"admin/services/antiblock/form": {
-		"title": "Args View",
+		"title": "Args",
 		"order": 1,
 		"action": {
 			"type": "view",
