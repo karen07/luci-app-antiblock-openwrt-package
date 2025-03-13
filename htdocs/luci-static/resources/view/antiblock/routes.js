@@ -186,8 +186,5 @@ return view.extend({
         o = s.taboption('general', form.Value, 'domains_path', _('Domains path'), _('Domains path'));
 
         return m.render();
-    },
-    handleSave: null,
-    handleSaveApply: null,
-    handleReset: null
+    }
 });
