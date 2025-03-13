@@ -4,8 +4,6 @@
 		"read": {
 			"ubus": {
 				"luci.antiblock": [
-					"read_routes",
-					"write_routes",
 					"read_domains",
 					"write_domains"
 				]

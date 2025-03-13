@@ -1,6 +1,7 @@
 'use strict';
 'require view';
 'require form';
+'require tools.widgets as widgets';
 
 return view.extend({
 	render: function () {

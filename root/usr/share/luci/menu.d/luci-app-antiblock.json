@@ -11,12 +11,12 @@
 			]
 		}
 	},
-	"admin/services/antiblock/form": {
+	"admin/services/antiblock/args": {
 		"title": "Args",
 		"order": 1,
 		"action": {
 			"type": "view",
-			"path": "antiblock/form"
+			"path": "antiblock/args"
 		}
 	},
 	"admin/services/antiblock/routes": {
@@ -25,6 +25,14 @@
 		"action": {
 			"type": "view",
 			"path": "antiblock/routes"
+		}
+	},
+	"admin/services/antiblock/domains": {
+		"title": "Domains",
+		"order": 3,
+		"action": {
+			"type": "view",
+			"path": "antiblock/domains"
 		}
 	}
 }
