@@ -104,7 +104,7 @@ return view.extend({
         }
 
         return main_div;
-        */
+        
 
         var v = E([], [
             E('h2', _('Routes')),
@@ -162,7 +162,30 @@ return view.extend({
 
         v.appendChild(add_btn);
 
-        return v;
+        return v;*/
+
+        var m, s, o;
+
+        m = new form.Map('antiblock', _('Routes'), _('Routes'));
+        m.tabbed = true;
+
+        s = m.section(form.GridSection, 'route', _('Routes'));
+        s.anonymous = true;
+        s.addremove = true;
+        s.sortable = true;
+        s.cloneable = true;
+        s.nodescriptions = true;
+
+        s.tab('general', _('General Settings'));
+
+        o = s.taboption('general', widgets.NetworkSelect, 'gateway', _('Gateway'), _('Gateway'));
+        o.loopback = true;
+        o.nocreate = true;
+        o.rmempty = true;
+
+        o = s.taboption('general', form.Value, 'domains_path', _('Domains path'), _('Domains path'));
+
+        return m.render();
     },
     handleSave: null,
     handleSaveApply: null,
