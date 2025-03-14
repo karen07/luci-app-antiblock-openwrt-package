@@ -33,16 +33,7 @@ return view.extend({
         await uci.load('antiblock');
 
         main_config = uci.sections('antiblock', 'main');
-
-        if (main_config[0].output === undefined) {
-            return;
-        }
-
-        if (main_config[0].stat === undefined) {
-            return;
-        }
-
-        if (main_config[0].stat == '0') {
+        if (main_config[0].output === undefined || main_config[0].stat === undefined || main_config[0].stat == '0') {
             return;
         }
 
@@ -58,48 +49,20 @@ return view.extend({
         routes_div.appendChild(E('div', { class: 'cbi-section-descr' }, _('Stat is not enabled.')));
         main_div.appendChild(routes_div);
 
-        let main_config = uci.sections('antiblock', 'main');
-
-        if (main_config[0].output === undefined) {
+        if (main_config[0].output === undefined || main_config[0].stat === undefined || main_config[0].stat == '0') {
             return main_div;
         }
-
-        if (main_config[0].stat === undefined) {
-            return main_div;
-        }
-
-        if (main_config[0].stat == '0') {
-            return main_div;
-        }
-
-        var scrollDownButton = E('button', {
-            'id': 'scrollDownButton',
-            'class': 'cbi-button cbi-button-neutral',
-        }, _('Scroll to tail', 'scroll to bottom (the tail) of the stat file'));
-        scrollDownButton.addEventListener('click', function () {
-            scrollUpButton.scrollIntoView();
-        });
-
-        var scrollUpButton = E('button', {
-            'id': 'scrollUpButton',
-            'class': 'cbi-button cbi-button-neutral',
-        }, _('Scroll to head', 'scroll to top (the head) of the stat file'));
-        scrollUpButton.addEventListener('click', function () {
-            scrollDownButton.scrollIntoView();
-        });
 
         return E([], [
             E('h2', {}, [_('Stat')]),
             E('div', { 'id': 'content_syslog' }, [
-                E('div', { 'style': 'padding-bottom: 20px' }, [scrollDownButton]),
                 E('textarea', {
                     'id': 'syslog',
                     'style': 'font-size:12px',
                     'readonly': 'readonly',
                     'wrap': 'off',
                     'rows': loglines.rows
-                }, [loglines.value]),
-                E('div', { 'style': 'padding-bottom: 20px' }, [scrollUpButton])
+                }, [loglines.value])
             ])
         ]);
     },
