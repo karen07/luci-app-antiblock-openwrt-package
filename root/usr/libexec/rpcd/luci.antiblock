@@ -12,12 +12,12 @@ read_domains() {
     json_get_var domains_path "domains_path"
     json_cleanup
 
-    json_init
     if [ -n "$domains_path" ]; then
         if [ ! -f "$domains_path" ]; then
             touch "$domains_path"
         fi
 
+        json_init
         json_add_array "domains"
         local file_data=$(cat $domains_path)
         local domain
@@ -25,12 +25,9 @@ read_domains() {
             json_add_string "" "$domain"
         done
         json_close_array
-    else
-        json_add_array "empty"
-        json_close_array
+        json_dump
+        json_cleanup
     fi
-    json_dump
-    json_cleanup
 }
 
 write_domains() {
@@ -48,10 +45,11 @@ write_domains() {
         for domain in $domains; do
             echo "$domain" >>$domains_path
         done
-        json_cleanup
 
         /etc/init.d/antiblock restart
     fi
+
+    json_cleanup
 }
 
 case "$1" in
