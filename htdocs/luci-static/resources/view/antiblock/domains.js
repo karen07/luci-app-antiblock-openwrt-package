@@ -38,7 +38,7 @@ function read_domains_handler(data) {
     domains_textarea.value = '';
     data[0].domains.forEach((element) => domains_textarea.value += element + '\n');
 
-    const btn_write_domains = E('button', { class: 'cbi-button-apply', click: write_domains_handler }, _('Write domains'));
+    const btn_write_domains = E('button', { class: 'cbi-button cbi-button-apply', click: write_domains_handler }, _('Write domains'));
 
     section_data.appendChild(section_descr_div);
     section_data.appendChild(domains_textarea);
