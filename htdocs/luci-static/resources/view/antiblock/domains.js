@@ -1,5 +1,6 @@
 'use strict';
 'require ui';
+'require uci';
 'require form';
 'require rpc';
 'require view';
@@ -17,37 +18,33 @@ const write_domains = rpc.declare({
 });
 
 return view.extend({
-    generic_failure: function (message) {
-        return E('div', {
-            'class': 'error'
-        }, ['RPC call failure: ', message]);
-    },
+    handleSaveApply: null,
+    handleSave: null,
+    handleReset: null,
     load: function () {
         return Promise.all([
-            read_domains('/root/domains')
+            uci.load('antiblock')
         ]);
     },
     render: function (data) {
-        const main_div = E('div');
+        let sections = uci.sections('antiblock', 'route');
 
-        const header = E('h2', {}, _('Domains'));
+        const section_routes = E('select', { class: 'cbi-input-select' });
+        section_routes.appendChild(E('option'));
+        sections.forEach((route) => {
+            const routes_option = E('option', { value: route.domains_path }, route.domains_path);
+            section_routes.appendChild(routes_option);
+        });
+        const routes_div = E('div', { class: 'cbi-section' });
+        routes_div.appendChild(E('div', { class: 'cbi-section-descr' }, _('Domains:')));
+        routes_div.appendChild(section_routes);
 
-        const section_descr_div = E(
-            'div',
-            {
-                class: 'cbi-section-descr',
-            },
-            _('Domains count in file: ')
-        );
+        const main_div = E([]);
+        const section_descr_div = E('div', { class: 'cbi-section-descr' }, _('Domains count in file: '));
+        const section_div = E('div', { class: 'cbi-section' });
 
-        const section_div = E(
-            'div',
-            {
-                class: 'cbi-section',
-            }
-        );
-
-        main_div.appendChild(header);
+        main_div.appendChild(E('h2', _('Domains')));
+        main_div.appendChild(routes_div);
         main_div.appendChild(section_div);
         section_div.appendChild(section_descr_div);
 
@@ -80,7 +77,7 @@ return view.extend({
                         const write_domains_res = Promise.all([write_domains('/root/domains', lines)]);
                         write_domains_res.then(
                             function (value) { location.reload(); },
-                            function (error) { /* code if some error */ }
+                            function (error) { }
                         );
                     },
                 },
@@ -90,19 +87,9 @@ return view.extend({
             section_div.appendChild(domains_textarea);
             section_div.appendChild(btn_write_domains);
         } else {
-            const error_div = E(
-                'div',
-                {
-                },
-                _('The File argument was not specified.')
-            );
-
-            section_div.appendChild(error_div);
+            section_div.appendChild(E('div',_('The File argument was not specified.')));
         }
 
         return main_div;
-    },
-    handleSave: null,
-    handleSaveApply: null,
-    handleReset: null
+    }
 });
