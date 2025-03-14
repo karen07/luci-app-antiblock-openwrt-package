@@ -20,41 +20,44 @@ const write_domains = rpc.declare({
 let section_routes;
 let section_div;
 
+function read_domains_handler(data) {
+    section_div.innerHTML = '';
+    const section_descr_div = E('div', { class: 'cbi-section-descr' }, _('Domains count in file: '));
+    section_div.appendChild(section_descr_div);
+    if (typeof data[0].domains !== 'undefined') {
+        const domains_textarea = E('textarea', { class: 'cbi-input-textarea' },);
+        section_descr_div.innerHTML += data[0].domains.length;
+        domains_textarea.value = '';
+        data[0].domains.forEach((element) => domains_textarea.value += element + '\n');
+        const btn_write_domains = E(
+            'button',
+            {
+                class: 'btn cbi-button cbi-button-apply',
+                click: function (ev) {
+                    ui.showModal(null, [E('p', { class: 'spinning' }, _('Write domains'))]);
+                    const lines = domains_textarea.value.split(/\r?\n/).filter(Boolean);
+                    const domains_path = section_routes.selectedOptions[0].label;
+                    const write_domains_res = Promise.all([write_domains(domains_path, lines)]);
+                    write_domains_res.then(
+                        function (value) { location.reload(); },
+                        function (error) { }
+                    );
+                },
+            },
+            _('Write domains')
+        );
+        section_div.appendChild(domains_textarea);
+        section_div.appendChild(btn_write_domains);
+    } else {
+        section_div.appendChild(E('div', _('Domain is not selected.')));
+    }
+}
+
 function select_handler() {
     const domains_path = section_routes.selectedOptions[0].label;
     const read_domains_res = Promise.all([read_domains(domains_path)]);
     read_domains_res.then(
-        function (data) {
-            section_div.innerHTML = '';
-            const section_descr_div = E('div', { class: 'cbi-section-descr' }, _('Domains count in file: '));
-            section_div.appendChild(section_descr_div);
-            if (typeof data[0].domains !== 'undefined') {
-                const domains_textarea = E('textarea', { class: 'cbi-input-textarea' },);
-                section_descr_div.innerHTML += data[0].domains.length;
-                domains_textarea.value = '';
-                data[0].domains.forEach((element) => domains_textarea.value += element + '\n');
-                const btn_write_domains = E(
-                    'button',
-                    {
-                        class: 'btn cbi-button cbi-button-apply',
-                        click: function (ev) {
-                            ui.showModal(null, [E('p', { class: 'spinning' }, _('Write domains'))]);
-                            const lines = domains_textarea.value.split(/\r?\n/).filter(Boolean);
-                            const write_domains_res = Promise.all([write_domains(domains_path, lines)]);
-                            write_domains_res.then(
-                                function (value) { location.reload(); },
-                                function (error) { }
-                            );
-                        },
-                    },
-                    _('Write domains')
-                );
-                section_div.appendChild(domains_textarea);
-                section_div.appendChild(btn_write_domains);
-            } else {
-                section_div.appendChild(E('div', _('Domain is not selected.')));
-            }
-        },
+        read_domains_handler,
         function (error) { }
     );
 }
