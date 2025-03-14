@@ -73,7 +73,6 @@ return view.extend({
         let sections = uci.sections('antiblock', 'route');
 
         section_routes = E('select', { class: 'cbi-input-select', change: select_handler });
-        section_routes.appendChild(E('option'));
         sections.forEach((route) => {
             if (route.domains_path.substring(0, 4) != 'http') {
                 const routes_option = E('option', { value: route.domains_path }, route.domains_path);
@@ -89,6 +88,8 @@ return view.extend({
         main_div.appendChild(routes_div);
         section_div = E('div', { class: 'cbi-section' });
         main_div.appendChild(section_div);
+
+        select_handler();
 
         return main_div;
     }
