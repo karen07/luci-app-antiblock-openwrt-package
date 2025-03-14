@@ -87,7 +87,7 @@ return view.extend({
             section_div.appendChild(domains_textarea);
             section_div.appendChild(btn_write_domains);
         } else {
-            section_div.appendChild(E('div',_('The File argument was not specified.')));
+            section_div.appendChild(E('div', _('Domain is not selected.')));
         }
 
         return main_div;
