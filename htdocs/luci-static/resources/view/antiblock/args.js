@@ -12,13 +12,16 @@ return view.extend({
 
 		let o = s.option(form.Flag, 'enabled', _('Enabled'));
 
+		o = s.option(form.DynamicList, 'blacklist', _('Blacklist'), _('Blacklist'));
+		o.depends('enabled', '1');
+
 		o = s.option(form.Value, 'output', _('Output'), _('Log or statistics output folder, optional parameter'));
 		o.depends('enabled', '1');
 
 		o = s.option(form.Flag, 'log', _('Log'), _('Show operations log, optional parameter'));
 		o.depends({ output: '/', '!contains': true });
 
-		o = s.option(form.Flag, 'stat', _('Stat'), _('Show statistics data, optional parameter'));
+		o = s.option(form.Flag, 'stat', _('Statistics'), _('Show statistics data, optional parameter'));
 		o.depends({ output: '/', '!contains': true });
 
 		return m.render();

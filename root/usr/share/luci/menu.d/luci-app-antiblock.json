@@ -35,20 +35,20 @@
 			"path": "antiblock/domains"
 		}
 	},
-	"admin/services/antiblock/log": {
-		"title": "Log",
+	"admin/services/antiblock/statistics": {
+		"title": "Statistics",
 		"order": 4,
 		"action": {
 			"type": "view",
-			"path": "antiblock/log"
+			"path": "antiblock/statistics"
 		}
 	},
-	"admin/services/antiblock/stat": {
-		"title": "Stat",
+	"admin/services/antiblock/log": {
+		"title": "Log",
 		"order": 5,
 		"action": {
 			"type": "view",
-			"path": "antiblock/stat"
+			"path": "antiblock/log"
 		}
 	}
 }

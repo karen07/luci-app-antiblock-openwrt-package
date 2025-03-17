@@ -15,7 +15,7 @@ return view.extend({
             });
             return { value: loglines.join('\n'), rows: loglines.length + 1 };
         }).catch(function (err) {
-            ui.addNotification(null, E('p', {}, _('Unable to load stat data: ' + err.message)));
+            ui.addNotification(null, E('p', {}, _('Unable to load statistics data: ' + err.message)));
             return '';
         });
     },
@@ -44,9 +44,9 @@ return view.extend({
 
     render: function (loglines) {
         const main_div = E([]);
-        main_div.appendChild(E('h2', _('Stat')));
+        main_div.appendChild(E('h2', _('Statistics')));
         const routes_div = E('div', { class: 'cbi-section' });
-        routes_div.appendChild(E('div', { class: 'cbi-section-descr' }, _('Stat is not enabled.')));
+        routes_div.appendChild(E('div', { class: 'cbi-section-descr' }, _('Statistics is not enabled.')));
         main_div.appendChild(routes_div);
 
         if (main_config[0].output === undefined || main_config[0].stat === undefined || main_config[0].stat == '0') {
@@ -54,7 +54,7 @@ return view.extend({
         }
 
         return E([], [
-            E('h2', {}, [_('Stat')]),
+            E('h2', {}, [_('Statistics')]),
             E('div', { 'id': 'content_syslog' }, [
                 E('textarea', {
                     'id': 'syslog',
