@@ -39,10 +39,12 @@ function read_domains_handler(data) {
     data[0].domains.forEach((element) => domains_textarea.value += element + '\n');
 
     const btn_write_domains = E('button', { class: 'cbi-button cbi-button-apply', click: write_domains_handler }, _('Write domains'));
+    const div_for_btn = E('div', { style: 'padding-top: 20px' });
+    div_for_btn.appendChild(btn_write_domains);
 
     section_data.appendChild(section_descr_div);
     section_data.appendChild(domains_textarea);
-    section_data.appendChild(btn_write_domains);
+    section_data.appendChild(div_for_btn);
 }
 
 function select_handler() {

@@ -33,6 +33,10 @@ return view.extend({
 		await uci.load('antiblock');
 
 		main_config = uci.sections('antiblock', 'main');
+		if (main_config[0] === undefined) {
+			return;
+		}
+
 		if (main_config[0].output === undefined || main_config[0].log === undefined || main_config[0].log == '0') {
 			return;
 		}
@@ -48,6 +52,10 @@ return view.extend({
 		const routes_div = E('div', { class: 'cbi-section' });
 		routes_div.appendChild(E('div', { class: 'cbi-section-descr' }, _('Log is not enabled.')));
 		main_div.appendChild(routes_div);
+
+		if (main_config[0] === undefined) {
+			return main_div;
+		}
 
 		if (main_config[0].output === undefined || main_config[0].log === undefined || main_config[0].log == '0') {
 			return main_div;
@@ -80,7 +88,7 @@ return view.extend({
 					'wrap': 'off',
 					'rows': loglines.rows
 				}, [loglines.value]),
-				E('div', { 'style': 'padding-bottom: 20px' }, [scrollUpButton])
+				E('div', { 'style': 'padding-top: 20px' }, [scrollUpButton])
 			])
 		]);
 	},
