@@ -8,6 +8,7 @@ return view.extend({
         const m = new form.Map('antiblock', _('Routes'));
 
         const s = m.section(form.GridSection, 'route', _('Routes'), _('It is necessary to enter from 1 to 32 values:'));
+        s.optional = false;
         s.anonymous = true;
         s.addremove = true;
         s.nodescriptions = true;

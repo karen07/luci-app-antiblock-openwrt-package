@@ -8,12 +8,9 @@
 					"write_domains"
 				]
 			},
-			"cgi-io": [
-				"exec"
-			],
 			"file": {
-				"/bin/cat": [
-					"exec"
+				"/*": [
+					"read"
 				]
 			},
 			"uci": [
