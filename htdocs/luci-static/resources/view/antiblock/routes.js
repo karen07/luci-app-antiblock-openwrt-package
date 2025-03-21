@@ -17,7 +17,7 @@ return view.extend({
         o.loopback = true;
         o.nocreate = true;
 
-        o = s.option(form.Value, 'domains_path', _('Domains path'), _('Domains path'));
+        o = s.option(form.Value, 'domains_path', _('Domains path'), _('Domains path/URL'));
 
         return m.render();
     }
