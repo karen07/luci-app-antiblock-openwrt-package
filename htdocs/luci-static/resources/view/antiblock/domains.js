@@ -89,7 +89,7 @@ return view.extend({
             select_handler();
         } else {
             const routes_div = E('div', { class: 'cbi-section' });
-            routes_div.appendChild(E('div', { class: 'cbi-section-descr' }, _('Domains path no files.')));
+            routes_div.appendChild(E('div', { class: 'cbi-section-descr' }, _('Path to file in "Domains path" is not set.')));
             main_div.appendChild(routes_div);
         }
 
