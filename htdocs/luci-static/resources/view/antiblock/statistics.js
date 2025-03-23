@@ -33,7 +33,7 @@ return view.extend({
         await uci.load('antiblock');
 
         main_config = uci.sections('antiblock', 'main');
-        if (!main_config[0]?.stat === '0') {
+        if (!main_config[0]?.stat || main_config[0]?.stat === '0') {
             return;
         }
 
@@ -49,7 +49,7 @@ return view.extend({
         routes_div.appendChild(E('div', { class: 'cbi-section-descr' }, _('Statistics is not enabled.')));
         main_div.appendChild(routes_div);
 
-        if (!main_config[0]?.stat === '0') {
+        if (!main_config[0]?.stat || main_config[0]?.stat === '0') {
             return main_div;
         }
 
