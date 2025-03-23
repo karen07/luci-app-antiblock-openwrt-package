@@ -9,7 +9,7 @@ let main_config;
 
 return view.extend({
 	retrieveLog: async function () {
-		return fs.read(main_config[0].output + '/log.txt').then(logdata => {
+		return fs.read('/tmp/antiblock/log.txt').then(logdata => {
 			const loglines = logdata.trim().split(/\n/).map(function (line) {
 				return line.replace(/^<\d+>/, '');
 			});
@@ -33,7 +33,7 @@ return view.extend({
 		await uci.load('antiblock');
 
 		main_config = uci.sections('antiblock', 'main');
-		if (!main_config[0]?.output || main_config[0]?.log === '0') {
+		if (!main_config[0]?.log === '0') {
 			return;
 		}
 
@@ -49,7 +49,7 @@ return view.extend({
 		routes_div.appendChild(E('div', { class: 'cbi-section-descr' }, _('Log is not enabled.')));
 		main_div.appendChild(routes_div);
 
-		if (!main_config[0]?.output || main_config[0]?.log === '0') {
+		if (!main_config[0]?.log === '0') {
 			return main_div;
 		}
 
