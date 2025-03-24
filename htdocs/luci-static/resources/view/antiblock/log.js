@@ -53,7 +53,7 @@ return view.extend({
 			return main_div;
 		}
 
-		let scrollDownButton = E('button', {
+		const scrollDownButton = E('button', {
 			'id': 'scrollDownButton',
 			'class': 'cbi-button cbi-button-neutral',
 		}, _('Scroll to tail', 'scroll to bottom (the tail) of the log file'));
@@ -61,7 +61,7 @@ return view.extend({
 			scrollUpButton.scrollIntoView();
 		});
 
-		let scrollUpButton = E('button', {
+		const scrollUpButton = E('button', {
 			'id': 'scrollUpButton',
 			'class': 'cbi-button cbi-button-neutral',
 		}, _('Scroll to head', 'scroll to top (the head) of the log file'));

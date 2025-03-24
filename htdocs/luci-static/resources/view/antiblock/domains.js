@@ -21,7 +21,7 @@ async function write_domains_handler() {
 }
 
 function read_domains_handler(data) {
-    let text_data = data[0].split(/\r?\n/).filter(Boolean);
+    const text_data = data[0].split(/\r?\n/).filter(Boolean);
 
     section_data.innerHTML = '';
 
@@ -54,7 +54,7 @@ return view.extend({
         return await uci.load('antiblock');
     },
     render: function () {
-        let uci_routes = uci.sections('antiblock', 'route');
+        const uci_routes = uci.sections('antiblock', 'route');
 
         let file_paths = 0;
 
