@@ -1,42 +1,35 @@
 'use strict';
 'require ui';
 'require uci';
+'require fs';
 'require form';
-'require rpc';
 'require view';
-
-const read_domains = rpc.declare({
-    object: 'luci.antiblock',
-    method: 'read_domains',
-    params: ['domains_path']
-});
-
-const write_domains = rpc.declare({
-    object: 'luci.antiblock',
-    method: 'write_domains',
-    params: ['domains_path', 'domains']
-});
 
 let section_routes;
 let section_data;
 let domains_textarea;
 
-function write_domains_handler() {
+async function write_domains_handler() {
     ui.showModal(null, [E('p', { class: 'spinning' }, _('Write domains'))]);
     const lines = domains_textarea.value.split(/\r?\n/).filter(Boolean);
+    let write_data = '';
+    lines.forEach((element) => write_data += element + '\n');
     const domains_path = section_routes.selectedOptions[0].label;
-    const write_domains_res = Promise.all([write_domains(domains_path, lines)]);
-    write_domains_res.then(function () { location.reload(); });
+    await fs.write(domains_path, write_data);
+    await fs.exec('/etc/init.d/antiblock', ['restart']);
+    location.reload();
 }
 
 function read_domains_handler(data) {
+    let text_data = data[0].split(/\r?\n/).filter(Boolean);
+
     section_data.innerHTML = '';
 
-    const section_descr_div = E('div', { class: 'cbi-section-descr' }, _('Domains count in file: ') + data[0].domains.length);
+    const section_descr_div = E('div', { class: 'cbi-section-descr' }, _('Domains count in file: ') + text_data.length);
 
     domains_textarea = E('textarea', { class: 'cbi-input-textarea' },);
     domains_textarea.value = '';
-    data[0].domains.forEach((element) => domains_textarea.value += element + '\n');
+    text_data.forEach((element) => domains_textarea.value += element + '\n');
 
     const btn_write_domains = E('button', { class: 'cbi-button cbi-button-apply', click: write_domains_handler }, _('Write domains'));
     const div_for_btn = E('div', { style: 'padding-top: 20px' });
@@ -49,7 +42,7 @@ function read_domains_handler(data) {
 
 function select_handler() {
     const domains_path = section_routes.selectedOptions[0].label;
-    const read_domains_res = Promise.all([read_domains(domains_path)]);
+    const read_domains_res = Promise.all([fs.read(domains_path)]);
     read_domains_res.then(read_domains_handler);
 }
 
@@ -57,8 +50,8 @@ return view.extend({
     handleSaveApply: null,
     handleSave: null,
     handleReset: null,
-    load: function () {
-        return Promise.all([uci.load('antiblock')]);
+    load: async function () {
+        return await uci.load('antiblock');
     },
     render: function () {
         let uci_routes = uci.sections('antiblock', 'route');

@@ -2,15 +2,15 @@
 	"luci-app-antiblock": {
 		"description": "Grant UCI and RPC access to LuCI app AntiBlock",
 		"read": {
-			"ubus": {
-				"luci.antiblock": [
-					"read_domains",
-					"write_domains"
-				]
-			},
+			"cgi-io": [
+				"exec"
+			],
 			"file": {
 				"/*": [
 					"read"
+				],
+				"/etc/init.d/antiblock": [
+					"exec"
 				]
 			},
 			"uci": [
@@ -18,6 +18,11 @@
 			]
 		},
 		"write": {
+			"file": {
+				"/*": [
+					"write"
+				]
+			},
 			"uci": [
 				"antiblock"
 			]
