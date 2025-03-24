@@ -2,9 +2,6 @@
 	"luci-app-antiblock": {
 		"description": "Grant UCI and RPC access to LuCI app AntiBlock",
 		"read": {
-			"cgi-io": [
-				"exec"
-			],
 			"file": {
 				"/*": [
 					"read"
