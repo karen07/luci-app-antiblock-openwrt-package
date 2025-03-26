@@ -9,7 +9,7 @@ let main_config;
 
 return view.extend({
     retrieveLog: async function () {
-        return fs.read('/tmp/antiblock/stat.txt').then(logdata => {
+        return fs.read_direct('/tmp/antiblock/stat.txt').then(logdata => {
             const loglines = logdata.trim().split(/\n/).map(function (line) {
                 return line.replace(/^<\d+>/, '');
             });
@@ -37,7 +37,7 @@ return view.extend({
             return;
         }
 
-        poll.add(this.pollLog.bind(this));
+        poll.add(this.pollLog.bind(this), 10);
 
         return await this.retrieveLog();
     },
