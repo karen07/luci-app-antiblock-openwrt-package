@@ -42,18 +42,27 @@ function read_domains_handler(data) {
 function select_handler() {
     section_data.innerHTML = '';
     const domains_path = section_routes.selectedOptions[0].label;
-    fs.read(domains_path).then(read_domains_handler).catch(function (err) {
-        if (err.message == 'Resource not found') {
-            fs.write(domains_path, '').catch(function (err) {
-                section_data.appendChild(E('p', {}, _('Unable to create domains file ' + domains_path + ' "' + err.message + '"')));
-            });
-            read_domains_handler("");
-        } else if (err.message == 'No data received') {
-            read_domains_handler("");
-        } else {
-            section_data.appendChild(E('p', {}, _('Unable to read domains file ' + domains_path + ' "' + err.message + '"')));
+    fs.read(domains_path).then(
+        read_domains_handler
+    ).catch(
+        function (err) {
+            if (err.message == 'Resource not found') {
+                fs.exec('/bin/mkdir', ['/etc/antiblock']).then(
+                    fs.write(domains_path, '').then(
+                        read_domains_handler("")
+                    ).catch(
+                        function (err) {
+                            section_data.appendChild(E('p', {}, _('Unable to create domains file ' + domains_path + ' "' + err.message + '"')));
+                        }
+                    )
+                );
+            } else if (err.message == 'No data received') {
+                read_domains_handler("");
+            } else {
+                section_data.appendChild(E('p', {}, _('Unable to read domains file ' + domains_path + ' "' + err.message + '"')));
+            }
         }
-    });
+    );
 }
 
 return view.extend({

@@ -12,7 +12,10 @@
 				"/etc/antiblock/*": [
 					"read"
 				],
-				"/etc/init.d/antiblock": [
+				"/etc/init.d/antiblock restart": [
+					"exec"
+				],
+				"/bin/mkdir /etc/antiblock": [
 					"exec"
 				]
 			},
