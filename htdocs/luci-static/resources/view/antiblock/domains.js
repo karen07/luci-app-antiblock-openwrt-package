@@ -17,15 +17,13 @@ async function write_domains_handler() {
     const domains_path = section_routes.selectedOptions[0].label;
     await fs.write(domains_path, write_data);
     await fs.exec('/etc/init.d/antiblock', ['restart']);
-    location.reload();
+    ui.hideModal();
+    select_handler();
 }
 
 function read_domains_handler(data) {
-    const text_data = data[0].split(/\r?\n/).filter(Boolean);
-
-    section_data.innerHTML = '';
-
-    const section_descr_div = E('div', { class: 'cbi-section-descr' }, _('Domains count in file: ') + text_data.length);
+    const text_data = data.split(/\r?\n/).filter(Boolean);
+    const section_descr_div = E('div', { class: 'cbi-section-descr' }, _('Domain count in file: ') + text_data.length);
 
     domains_textarea = E('textarea', { class: 'cbi-input-textarea' },);
     domains_textarea.value = '';
@@ -35,15 +33,27 @@ function read_domains_handler(data) {
     const div_for_btn = E('div', { style: 'padding-top: 20px' });
     div_for_btn.appendChild(btn_write_domains);
 
+    section_data.innerHTML = '';
     section_data.appendChild(section_descr_div);
     section_data.appendChild(domains_textarea);
     section_data.appendChild(div_for_btn);
 }
 
 function select_handler() {
+    section_data.innerHTML = '';
     const domains_path = section_routes.selectedOptions[0].label;
-    const read_domains_res = Promise.all([fs.read(domains_path)]);
-    read_domains_res.then(read_domains_handler);
+    fs.read(domains_path).then(read_domains_handler).catch(function (err) {
+        if (err.message == 'Resource not found') {
+            fs.write(domains_path, '').catch(function (err) {
+                section_data.appendChild(E('p', {}, _('Unable to create domains file ' + domains_path + ' "' + err.message + '"')));
+            });
+            read_domains_handler("");
+        } else if (err.message == 'No data received') {
+            read_domains_handler("");
+        } else {
+            section_data.appendChild(E('p', {}, _('Unable to read domains file ' + domains_path + ' "' + err.message + '"')));
+        }
+    });
 }
 
 return view.extend({

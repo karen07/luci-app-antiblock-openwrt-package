@@ -3,7 +3,13 @@
 		"description": "Grant UCI and RPC access to LuCI app AntiBlock",
 		"read": {
 			"file": {
-				"/*": [
+				"/tmp/antiblock/log.txt": [
+					"read"
+				],
+				"/tmp/antiblock/stat.txt": [
+					"read"
+				],
+				"/etc/antiblock/*": [
 					"read"
 				],
 				"/etc/init.d/antiblock": [
@@ -16,7 +22,7 @@
 		},
 		"write": {
 			"file": {
-				"/*": [
+				"/etc/antiblock/*": [
 					"write"
 				]
 			},

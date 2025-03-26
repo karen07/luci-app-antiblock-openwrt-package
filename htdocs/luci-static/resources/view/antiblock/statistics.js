@@ -46,7 +46,7 @@ return view.extend({
         const main_div = E([]);
         main_div.appendChild(E('h2', _('Statistics')));
         const routes_div = E('div', { class: 'cbi-section' });
-        routes_div.appendChild(E('div', { class: 'cbi-section-descr' }, _('Statistics is not enabled.')));
+        routes_div.appendChild(E('div', { class: 'cbi-section-descr' }, _('Statistics are not enabled.')));
         main_div.appendChild(routes_div);
 
         if (!main_config[0]?.stat || main_config[0]?.stat === '0') {

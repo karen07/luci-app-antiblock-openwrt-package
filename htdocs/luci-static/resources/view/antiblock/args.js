@@ -12,7 +12,7 @@ return view.extend({
 
 		let o = s.option(form.Flag, 'enabled', _('Enabled'));
 
-		o = s.option(form.DynamicList, 'blacklist', _('Blacklist'), _('Not add IP from these subnets to routing table, optional parameter'));
+		o = s.option(form.DynamicList, 'blacklist', _('Blacklist'), _('Prevent adding IP from these subnets to the routing table, optional parameter'));
 		o.depends('enabled', '1');
 
 		o = s.option(form.Flag, 'log', _('Log'), _('Show operations log, optional parameter'));
