@@ -9,7 +9,7 @@ let main_config;
 
 return view.extend({
     retrieveLog: async function () {
-        return fs.read_direct('/tmp/antiblock/stat.txt').then(logdata => {
+        return fs.read_direct('/tmp/antiblock/stat.txt').then(function (logdata) {
             const loglines = logdata.trim().split(/\n/).map(function (line) {
                 return line.replace(/^<\d+>/, '');
             });
