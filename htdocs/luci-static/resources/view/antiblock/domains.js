@@ -79,21 +79,18 @@ return view.extend({
     render: function () {
         const uci_routes = uci.sections('antiblock', 'route');
 
-        let file_paths = 0;
-
         section_routes = E('select', { class: 'cbi-input-select', change: select_handler });
         uci_routes.forEach(function (route) {
             if (route.domains_path.substring(0, 4) != 'http') {
                 const routes_option = E('option', { value: route.domains_path }, route.domains_path);
                 section_routes.appendChild(routes_option);
-                file_paths++;
             }
         });
 
         const main_div = E([]);
         main_div.appendChild(E('h2', _('Domains')));
 
-        if (file_paths > 0) {
+        if (section_routes.innerHTML != '') {
             const routes_div = E('div', { class: 'cbi-section' });
             routes_div.appendChild(E('div', { class: 'cbi-section-descr' }, _('Domains path:')));
             routes_div.appendChild(section_routes);
