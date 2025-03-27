@@ -18,6 +18,7 @@ return view.extend({
         o.nocreate = true;
 
         o = s.option(form.Value, 'domains_path', _('Domains path'), _('Domains path/URL. If you want to add domains via LuCI, specify the files in the /etc/antiblock folder.'));
+        o.default = '/etc/antiblock/';
 
         return m.render();
     }

@@ -15,8 +15,12 @@ async function write_domains_handler() {
     let write_data = '';
     lines.forEach(function (element) { write_data += element + '\n' });
     const domains_path = section_routes.selectedOptions[0].label;
-    await fs.write(domains_path, write_data);
-    await fs.exec('/etc/init.d/antiblock', ['restart']);
+    try {
+        await fs.write(domains_path, write_data);
+        await fs.exec('/etc/init.d/antiblock', ['restart']);
+    } catch (err) {
+        ui.addNotification(null, E('p', {}, _('Unable to write to domains file ' + domains_path + ' "' + err.message + '"')));
+    }
     ui.hideModal();
     select_handler();
 }
