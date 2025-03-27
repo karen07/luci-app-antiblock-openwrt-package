@@ -13,7 +13,7 @@ async function write_domains_handler() {
     ui.showModal(null, [E('p', { class: 'spinning' }, _('Write domains'))]);
     const lines = domains_textarea.value.split(/\r?\n/).filter(Boolean);
     let write_data = '';
-    lines.forEach((element) => write_data += element + '\n');
+    lines.forEach(function (element) { write_data += element + '\n' });
     const domains_path = section_routes.selectedOptions[0].label;
     await fs.write(domains_path, write_data);
     await fs.exec('/etc/init.d/antiblock', ['restart']);
@@ -27,7 +27,7 @@ function read_domains_handler(data) {
 
     domains_textarea = E('textarea', { class: 'cbi-input-textarea' },);
     domains_textarea.value = '';
-    text_data.forEach((element) => domains_textarea.value += element + '\n');
+    text_data.forEach(function (element) { domains_textarea.value += element + '\n' });
 
     const btn_write_domains = E('button', { class: 'cbi-button cbi-button-apply', click: write_domains_handler }, _('Write domains'));
     const div_for_btn = E('div', { style: 'padding-top: 20px' });
@@ -78,7 +78,7 @@ return view.extend({
         let file_paths = 0;
 
         section_routes = E('select', { class: 'cbi-input-select', change: select_handler });
-        uci_routes.forEach((route) => {
+        uci_routes.forEach(function (route) {
             if (route.domains_path.substring(0, 4) != 'http') {
                 const routes_option = E('option', { value: route.domains_path }, route.domains_path);
                 section_routes.appendChild(routes_option);
