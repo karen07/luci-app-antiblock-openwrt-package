@@ -42,7 +42,7 @@ function read_domains_handler(data) {
 function select_handler() {
     section_data.innerHTML = '';
     const domains_path = section_routes.selectedOptions[0].label;
-    fs.read(domains_path).then(
+    fs.read_direct(domains_path).then(
         read_domains_handler
     ).catch(
         function (err) {
