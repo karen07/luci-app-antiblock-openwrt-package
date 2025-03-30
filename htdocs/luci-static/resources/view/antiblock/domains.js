@@ -50,7 +50,7 @@ function select_handler() {
         read_domains_handler
     ).catch(
         function (err) {
-            if (err.message == 'Resource not found') {
+            if (err.message == 'Failed to stat requested path') {
                 fs.exec('/bin/mkdir', ['/etc/antiblock']).then(
                     fs.write(domains_path, '').then(
                         read_domains_handler("")
@@ -60,8 +60,6 @@ function select_handler() {
                         }
                     )
                 );
-            } else if (err.message == 'No data received') {
-                read_domains_handler("");
             } else {
                 section_data.appendChild(E('p', {}, _('Unable to read domains file ') + domains_path + ' "' + err.message + '"'));
             }
