@@ -19,7 +19,7 @@ async function write_domains_handler() {
         await fs.write(domains_path, write_data);
         await fs.exec('/etc/init.d/antiblock', ['restart']);
     } catch (err) {
-        ui.addNotification(null, E('p', {}, _('Unable to write to domains file ') + domains_path + ' "' + err.message + '"'));
+        ui.addNotification(null, E('p', {}, _('Unable to write to domains file') + ' ' + domains_path + ' "' + err.message + '"'));
     }
     ui.hideModal();
     select_handler();
@@ -27,7 +27,7 @@ async function write_domains_handler() {
 
 function read_domains_handler(data) {
     const text_data = data.split(/\r?\n/).filter(Boolean);
-    const section_descr_div = E('div', { class: 'cbi-section-descr' }, _('Domain count in file: ') + text_data.length);
+    const section_descr_div = E('div', { class: 'cbi-section-descr' }, _('Domain count in file:') + ' ' + text_data.length);
 
     domains_textarea = E('textarea', { class: 'cbi-input-textarea' },);
     domains_textarea.value = '';
@@ -56,12 +56,12 @@ function select_handler() {
                         read_domains_handler("")
                     ).catch(
                         function (err) {
-                            section_data.appendChild(E('p', {}, _('Unable to create domains file ') + domains_path + ' "' + err.message + '"'));
+                            section_data.appendChild(E('p', {}, _('Unable to create domains file') + ' ' + domains_path + ' "' + err.message + '"'));
                         }
                     )
                 );
             } else {
-                section_data.appendChild(E('p', {}, _('Unable to read domains file ') + domains_path + ' "' + err.message + '"'));
+                section_data.appendChild(E('p', {}, _('Unable to read domains file') + ' ' + domains_path + ' "' + err.message + '"'));
             }
         }
     );

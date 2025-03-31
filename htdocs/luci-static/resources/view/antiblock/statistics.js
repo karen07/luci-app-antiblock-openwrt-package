@@ -15,7 +15,7 @@ return view.extend({
             });
             return { value: loglines.join('\n'), rows: loglines.length + 1 };
         }).catch(function (err) {
-            ui.addNotification(null, E('p', {}, _('Unable to load statistics data: ') + err.message));
+            ui.addNotification(null, E('p', {}, _('Unable to load statistics data:') + ' ' + err.message));
             return '';
         });
     },
