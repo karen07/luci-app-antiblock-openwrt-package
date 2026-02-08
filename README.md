@@ -1,2 +1,2 @@
 # AntiBlock LuCI OpenWrt package
-Web user interface for AntiBlock
+Web user interface for AntiBlock.
