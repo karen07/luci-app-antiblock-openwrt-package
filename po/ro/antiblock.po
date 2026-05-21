@@ -1,42 +1,42 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-08-23 17:45+0000\n"
+"PO-Revision-Date: 2025-11-24 10:28+0000\n"
 "Last-Translator: CRISTIAN ANDREI <cristianvdr@gmail.com>\n"
 "Language-Team: Romanian <https://hosted.weblate.org/projects/openwrt/"
 "luciapplicationsantiblock/ro/>\n"
 "Language: ro\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
-"20)) ? 1 : 2;\n"
-"X-Generator: Weblate 5.13\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : "
+"(n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+"X-Generator: Weblate 5.15-dev\n"
 
 #: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:8
 #: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:10
 #: applications/luci-app-antiblock/root/usr/share/luci/menu.d/luci-app-antiblock.json:3
 msgid "AntiBlock"
-msgstr ""
+msgstr "AntiBlock"
 
 #: applications/luci-app-antiblock/root/usr/share/luci/menu.d/luci-app-antiblock.json:15
 msgid "Args"
-msgstr ""
+msgstr "Argumente"
 
 #: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:15
 msgid "Blacklist"
-msgstr ""
+msgstr "Listă neagră"
 
 #: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/domains.js:30
 msgid "Domain count in file:"
-msgstr ""
+msgstr "Număr de domenii în fișier:"
 
 #: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/domains.js:89
 #: applications/luci-app-antiblock/root/usr/share/luci/menu.d/luci-app-antiblock.json:31
 msgid "Domains"
-msgstr ""
+msgstr "Domenii"
 
 #: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/routes.js:21
 msgid "Domains path"
-msgstr ""
+msgstr "Calea domeniilor"
 
 #: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/routes.js:21
 msgid ""
@@ -50,7 +50,7 @@ msgstr ""
 
 #: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/routes.js:24
 msgid "Enable"
-msgstr ""
+msgstr "Activați"
 
 #: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:13
 msgid "Enabled"
@@ -97,12 +97,12 @@ msgstr ""
 #: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/log.js:67
 msgctxt "scroll to top (the head) of the log file"
 msgid "Scroll to head"
-msgstr ""
+msgstr "Derulați la început"
 
 #: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/log.js:59
 msgctxt "scroll to bottom (the tail) of the log file"
 msgid "Scroll to tail"
-msgstr ""
+msgstr "Derulați la coadă"
 
 #: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:18
 msgid "Show operations log, optional parameter"
