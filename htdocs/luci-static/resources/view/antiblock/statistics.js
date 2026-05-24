@@ -13,16 +13,11 @@ return view.extend({
             .then(function(logdata) {
                 const loglines = logdata.trim().split(/\n/).map(function(
                     line) { return line.replace(/^<\d+>/, ''); });
-                return {
-                    value : loglines.join('\n'),
-                    rows : loglines.length + 1
-                };
+                return {value : loglines.join('\n'), rows : loglines.length + 1};
             })
             .catch(function(err) {
-                ui.addNotification(null,
-                                   E('p', {},
-                                     _('Unable to load statistics data:') +
-                                         ' ' + err.message));
+                ui.addNotification(
+                    null, E('p', {}, _('Unable to load statistics data:') + ' ' + err.message));
                 return '';
             });
     },
@@ -53,8 +48,8 @@ return view.extend({
         const main_div = E([]);
         main_div.appendChild(E('h2', _('Statistics')));
         const routes_div = E('div', {class : 'cbi-section'});
-        routes_div.appendChild(E('div', {class : 'cbi-section-descr'},
-                                 _('Statistics are not enabled.')));
+        routes_div.appendChild(
+            E('div', {class : 'cbi-section-descr'}, _('Statistics are not enabled.')));
         main_div.appendChild(routes_div);
 
         if (!main_config[0]?.stat || main_config[0]?.stat === '0') {
