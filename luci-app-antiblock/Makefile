@@ -1,0 +1,16 @@
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=luci-app-antiblock
+
+PKG_MAINTAINER:=Karen Khachatryan <karen0734@gmail.com>
+PKG_LICENSE:=AGPL-3.0-or-later
+PKG_LICENSE_FILES:=LICENSE
+
+LUCI_TITLE:=AntiBlock Web UI
+LUCI_URL:=https://github.com/karen07/luci-app-antiblock-openwrt-package
+LUCI_DESCRIPTION:=Provides Web UI for AntiBlock
+LUCI_DEPENDS:=+luci-base +antiblock
+
+include $(TOPDIR)/feeds/luci/luci.mk
+
+# call BuildPackage - OpenWrt buildroot signature
