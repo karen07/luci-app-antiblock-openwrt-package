@@ -1,6 +1,7 @@
 'use strict';
 'require view';
 'require form';
+'require uci';
 'require tools.widgets as widgets';
 
 return view.extend({
@@ -14,10 +15,14 @@ return view.extend({
         s.addremove = true;
         s.nodescriptions = true;
 
-        let o = s.option(widgets.DeviceSelect, 'gateway', _('Gateway'), _('Gateway'));
+        let o = s.option(widgets.DeviceSelect, 'interface', _('Interface'), _('Interface'));
         o.loopback = true;
         o.nocreate = true;
         o.noaliases = true;
+        o.cfgvalue = function(section_id) {
+            return uci.get('antiblock', section_id, 'interface') ||
+                   uci.get('antiblock', section_id, 'gateway');
+        };
 
         o = s.option(form.Value, 'domains_path', _('Domains path'),
                      _('Domains path/URL. If you want to add domains via LuCI, specify the files ' +

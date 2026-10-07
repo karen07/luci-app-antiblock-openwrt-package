@@ -8,12 +8,6 @@
                 ],
                 "/etc/antiblock/*": [
                     "read"
-                ],
-                "/etc/init.d/antiblock restart": [
-                    "exec"
-                ],
-                "/bin/mkdir /etc/antiblock": [
-                    "exec"
                 ]
             },
             "uci": [
@@ -24,6 +18,12 @@
             "file": {
                 "/etc/antiblock/*": [
                     "write"
+                ],
+                "/etc/init.d/antiblock restart": [
+                    "exec"
+                ],
+                "/bin/mkdir -p /etc/antiblock": [
+                    "exec"
                 ]
             },
             "uci": [

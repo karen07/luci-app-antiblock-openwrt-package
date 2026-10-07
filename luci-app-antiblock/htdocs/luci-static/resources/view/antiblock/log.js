@@ -18,7 +18,7 @@ return view.extend({
             .catch(function(err) {
                 ui.addNotification(null,
                                    E('p', {}, _('Unable to load log data:') + ' ' + err.message));
-                return '';
+                return {value : '', rows : 1};
             });
     },
 
