@@ -1,20 +1,19 @@
 # AntiBlock LuCI OpenWrt package
 
-This repository contains the LuCI web interface for configuring [AntiBlock](https://github.com/karen07/antiblock) on OpenWrt.
-
-The package depends on `luci-base` and the `antiblock` package. It provides browser-based configuration for the AntiBlock service together with translated UI strings stored in the `po/` tree.
-
-It is intentionally kept separate from the daemon package so the core service can be installed without LuCI on systems that do not need a web interface.
+A LuCI web interface for configuring [AntiBlock](https://github.com/karen07/antiblock) on
+OpenWrt. It provides browser-based service configuration and localized interface strings.
 
 ## Описание
 
-Этот репозиторий содержит веб-интерфейс LuCI для настройки [AntiBlock](https://github.com/karen07/antiblock) в OpenWrt.
+Веб-интерфейс LuCI для настройки [AntiBlock](https://github.com/karen07/antiblock) в
+OpenWrt. Позволяет управлять настройками сервиса через браузер и поддерживает локализованные
+строки интерфейса.
 
 Пакет зависит от `luci-base` и пакета `antiblock`. Он позволяет настраивать сервис AntiBlock из браузера и содержит переводы строк интерфейса в дереве `po/`.
 
 Пакет LuCI намеренно отделен от пакета самого сервиса, чтобы AntiBlock можно было устанавливать без веб-интерфейса на системах, где LuCI не нужен.
 
-## Что находится в репозитории
+## Структура проекта
 
 - `luci-app-antiblock/Makefile` - описание LuCI package;
 - `luci-app-antiblock/htdocs/` - JavaScript и файлы web UI;
