@@ -1,26 +1,37 @@
-# AntiBlock LuCI OpenWrt package
+# AntiBlock LuCI OpenWrt Package
 
 A LuCI web interface for configuring [AntiBlock](https://github.com/karen07/antiblock) on
 OpenWrt. It provides browser-based service configuration and localized interface strings.
-
-## Описание
 
 Веб-интерфейс LuCI для настройки [AntiBlock](https://github.com/karen07/antiblock) в
 OpenWrt. Позволяет управлять настройками сервиса через браузер и поддерживает локализованные
 строки интерфейса.
 
+## Описание
+
 Пакет зависит от `luci-base` и пакета `antiblock`. Он позволяет настраивать сервис AntiBlock из браузера и содержит переводы строк интерфейса в дереве `po/`.
 
 Пакет LuCI намеренно отделен от пакета самого сервиса, чтобы AntiBlock можно было устанавливать без веб-интерфейса на системах, где LuCI не нужен.
 
-## Структура проекта
+## Разработка и проверка изменений
 
-- `luci-app-antiblock/Makefile` - описание LuCI package;
-- `luci-app-antiblock/htdocs/` - JavaScript и файлы web UI;
-- `luci-app-antiblock/root/` - интеграция меню LuCI и ACL rpcd;
-- `luci-app-antiblock/po/` - переводы интерфейса;
-- `openwrt-build.env` - параметры пакета для общего CI;
-- `.github/workflows/openwrt-build.yml` - вызов общего reusable workflow.
+**Основные точки изменения:**
+
+- `luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/` - страницы настроек, логов, доменов, маршрутов и статистики LuCI;
+- `luci-app-antiblock/root/usr/share/rpcd/acl.d/luci-app-antiblock.json` - права RPC для интерфейса;
+- `luci-app-antiblock/root/usr/share/luci/menu.d/luci-app-antiblock.json` - пункт меню LuCI;
+- `luci-app-antiblock/po/` - локализации;
+- `luci-app-antiblock/Makefile` - метаданные пакета.
+
+**Проверка изменений:** Логика маршрутизации находится в основном `antiblock`, не в LuCI. Новые поля интерфейса сверяйте с UCI-опциями демона и правами RPC; после правок проверяйте сборку пакета и работу страниц LuCI на OpenWrt.
+
+**Типовая правка настройки:** поле LuCI задается в
+`luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js`;
+имя и значение должны соответствовать UCI-конфигурации в
+`antiblock-openwrt-package` и чтению опций в init-скрипте этого пакета.
+Если новый параметр передается демону, проверьте также его CLI в `antiblock`.
+Права `rpcd` пересматриваются при добавлении операций с файловой системой
+или сервисами, а не автоматически при изменении подписи поля.
 
 ## Сборка
 
@@ -35,7 +46,20 @@ CI можно запустить:
 
 Для ручной сборки каталог `luci-app-antiblock/` можно использовать как обычный package directory внутри OpenWrt buildroot/SDK.
 
+## Структура проекта
+
+- `luci-app-antiblock/Makefile` - описание LuCI package;
+- `luci-app-antiblock/htdocs/` - JavaScript и файлы web UI;
+- `luci-app-antiblock/root/` - интеграция меню LuCI и ACL rpcd;
+- `luci-app-antiblock/po/` - переводы интерфейса;
+- `openwrt-build.env` - параметры пакета для общего CI;
+- `.github/workflows/openwrt-build.yml` - вызов общего reusable workflow.
+
 ## Связанные проекты
 
 - [antiblock](https://github.com/karen07/antiblock) - основной daemon;
 - [antiblock-openwrt-package](https://github.com/karen07/antiblock-openwrt-package) - OpenWrt package, init script и UCI configuration.
+
+## Лицензия
+
+Проект распространяется под лицензией GNU Affero General Public License v3.0. Подробности см. в файле [LICENSE](LICENSE).
