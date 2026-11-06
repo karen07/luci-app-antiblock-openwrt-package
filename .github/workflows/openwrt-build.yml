@@ -24,7 +24,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "OpenWrt version, for example 25.12.5"
+        description: "OpenWrt version, for example 25.12.6"
         required: true
         type: string
       package:
