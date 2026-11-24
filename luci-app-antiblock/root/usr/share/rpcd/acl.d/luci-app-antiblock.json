@@ -2,6 +2,14 @@
     "luci-app-antiblock": {
         "description": "Grant UCI and RPC access to LuCI app AntiBlock",
         "read": {
+            "cgi-io": [
+                "download"
+            ],
+            "ubus": {
+                "file": [
+                    "read"
+                ]
+            },
             "file": {
                 "/tmp/antiblock/*": [
                     "read"
@@ -15,6 +23,12 @@
             ]
         },
         "write": {
+            "ubus": {
+                "file": [
+                    "write",
+                    "exec"
+                ]
+            },
             "file": {
                 "/etc/antiblock/*": [
                     "write"

@@ -1,2 +1,4 @@
 .openwrt-build/
 *.apk
+tests/.artifacts/
+.openwrt-build-e2e.sh

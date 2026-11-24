@@ -1,0 +1,10 @@
+# Chromium and system dependencies are already included in the official image.
+ARG PLAYWRIGHT_VERSION=1.64.1
+FROM mcr.microsoft.com/playwright:v${PLAYWRIGHT_VERSION}-noble
+ARG PLAYWRIGHT_VERSION
+
+# Only the JS test API is missing from Microsoft's official image.
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+ENV NODE_PATH=/opt/luci-e2e/node_modules
+RUN npm install --prefix /opt/luci-e2e --no-audit --no-fund \
+    "@playwright/test@${PLAYWRIGHT_VERSION}"

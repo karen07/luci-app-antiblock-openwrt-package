@@ -151,3 +151,75 @@ msgstr "Ní féidir scríobh chuig comhad fearainn"
 #: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/domains.js:36
 msgid "Write domains"
 msgstr "Scríobh fearainn"
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:19
+msgid "Listen"
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:20
+msgid "DNS source IPv4 address and port. Leave empty to use network.lan.ipaddr:53."
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:27
+msgid "Enter a valid IPv4 address and port (1-65535)."
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:34
+msgid "Additional IPv4 CIDR networks to exclude from routing (up to 110 entries)."
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:41
+msgid "Too many blacklist entries (maximum 110)."
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:44
+msgid "Use IPv4 CIDR notation with a prefix from 1 to 32."
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:47
+msgid "Write DNS operations to /tmp/antiblock/log.txt (RAM)."
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:52
+msgid "Write statistics to /tmp/antiblock/stat.txt (RAM)."
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:60
+msgid "Test mode"
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:61
+msgid "Process DNS traffic without modifying kernel routes."
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/domains.js:103
+msgid "No editable domain file is configured in /etc/antiblock."
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/routes.js:15
+msgid "Configure 1 to 32 enabled routes. Each route maps a domain list to a Linux network interface."
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/routes.js:22
+msgid "Interface"
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/routes.js:23
+msgid "Linux device name (for example wg0). Legacy gateway entries are also supported."
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/routes.js:33
+msgid "Enter a valid interface name (1-15 characters)."
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/routes.js:42
+msgid "Absolute file path or HTTP(S) URL. Local files under /etc/antiblock/ can be edited in the Domains tab."
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/routes.js:46
+msgid "Enter an absolute file path or an HTTP(S) URL."
+msgstr ""
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/domains.js:37
+msgid "Domains saved, but AntiBlock could not be restarted:"
+msgstr ""

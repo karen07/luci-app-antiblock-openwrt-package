@@ -152,3 +152,75 @@ msgstr "Не удалось записать в файл доменов"
 #: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/domains.js:36
 msgid "Write domains"
 msgstr "Запись доменов"
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:19
+msgid "Listen"
+msgstr "Адрес DNS"
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:20
+msgid "DNS source IPv4 address and port. Leave empty to use network.lan.ipaddr:53."
+msgstr "IPv4-адрес и порт источника DNS. Оставьте пустым, чтобы использовать network.lan.ipaddr:53."
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:27
+msgid "Enter a valid IPv4 address and port (1-65535)."
+msgstr "Укажите корректный IPv4-адрес и порт от 1 до 65535."
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:34
+msgid "Additional IPv4 CIDR networks to exclude from routing (up to 110 entries)."
+msgstr "Дополнительные подсети IPv4 CIDR, исключаемые из маршрутизации (до 110 записей)."
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:41
+msgid "Too many blacklist entries (maximum 110)."
+msgstr "Слишком много подсетей в списке исключений (максимум 110)."
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:44
+msgid "Use IPv4 CIDR notation with a prefix from 1 to 32."
+msgstr "Используйте формат IPv4 CIDR с префиксом от 1 до 32."
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:47
+msgid "Write DNS operations to /tmp/antiblock/log.txt (RAM)."
+msgstr "Записывать DNS-операции в /tmp/antiblock/log.txt (в оперативной памяти)."
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:52
+msgid "Write statistics to /tmp/antiblock/stat.txt (RAM)."
+msgstr "Записывать статистику в /tmp/antiblock/stat.txt (в оперативной памяти)."
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:60
+msgid "Test mode"
+msgstr "Тестовый режим"
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/args.js:61
+msgid "Process DNS traffic without modifying kernel routes."
+msgstr "Обрабатывать DNS-трафик без изменения маршрутов ядра."
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/domains.js:103
+msgid "No editable domain file is configured in /etc/antiblock."
+msgstr "Не настроен редактируемый файл доменов в /etc/antiblock."
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/routes.js:15
+msgid "Configure 1 to 32 enabled routes. Each route maps a domain list to a Linux network interface."
+msgstr "Настройте от 1 до 32 включённых правил. Каждое связывает список доменов с сетевым интерфейсом Linux."
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/routes.js:22
+msgid "Interface"
+msgstr "Интерфейс"
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/routes.js:23
+msgid "Linux device name (for example wg0). Legacy gateway entries are also supported."
+msgstr "Имя сетевого устройства Linux (например, wg0). Старый ключ gateway также поддерживается."
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/routes.js:33
+msgid "Enter a valid interface name (1-15 characters)."
+msgstr "Введите корректное имя интерфейса (от 1 до 15 символов)."
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/routes.js:42
+msgid "Absolute file path or HTTP(S) URL. Local files under /etc/antiblock/ can be edited in the Domains tab."
+msgstr "Абсолютный путь к файлу или URL HTTP(S). Локальные файлы в /etc/antiblock/ можно изменять во вкладке «Домены»."
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/routes.js:46
+msgid "Enter an absolute file path or an HTTP(S) URL."
+msgstr "Укажите абсолютный путь к файлу или URL HTTP(S)."
+
+#: applications/luci-app-antiblock/htdocs/luci-static/resources/view/antiblock/domains.js:37
+msgid "Domains saved, but AntiBlock could not be restarted:"
+msgstr "Домены сохранены, но перезапустить AntiBlock не удалось:"
